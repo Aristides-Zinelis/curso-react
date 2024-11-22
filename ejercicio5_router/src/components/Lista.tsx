@@ -1,5 +1,6 @@
 import { Item } from "./Item"
 import { IMensaje } from "./Mesages"
+import  style  from "./lista.module.scss"
 
 type IProps= {
     mansajes : IMensaje[]
@@ -12,7 +13,7 @@ export function Lista(props: IProps){
       )
 
     return (
-        <div>  {items} </div>
+        <div className={style.lista}> {items} </div>
     )
 
 }

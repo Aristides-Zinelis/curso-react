@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { Lista } from "./Lista"
 
 type IProps = {
@@ -15,13 +15,16 @@ export type IMensaje = {
 }
 
 export function Mesages( props: IProps){
-    const [mensajes, setMensajes] =  useState<IMensaje[] | null>(null)
+    const [mensajes, setMensajes] =  useState<IMensaje[] | null>(null);
+    const [mensajesFiltrados, setMensajesFiltrados] =  useState<IMensaje[] | null>(null);
+    const campoFiltro = useRef<HTMLInputElement | null>(null);
 
     useEffect(() => {
         const getData = async () => {
             const response = await fetch(props.apiURL)
             const data = await response.json();
             setMensajes(data);
+            setMensajesFiltrados([...data]);
         }
 
         getData()
@@ -33,15 +36,34 @@ export function Mesages( props: IProps){
         )
     }
 
+    const filtrar = () => {
+        const filtro = campoFiltro?.current?.value;
+        if(filtro) {
+           const mensajesFiltradosNuevos = mensajes?.filter(mensaje =>
+                mensaje.asunto.toLocaleLowerCase().includes(filtro.toLocaleLowerCase()));
+                setMensajesFiltrados(mensajesFiltradosNuevos);
+            } else {
+                setMensajesFiltrados([...mensajes])
+            }
+        }
+
+
 
     return (
         <div>
             <h1>Mensages</h1>
+            <div>
+                <input 
+                    placeholder="filtrar poir asunto"
+                    ref={campoFiltro}
+                />
+                <button onClick={filtrar}>filtrat</button>
+            </div>
             {
-                !mensajes ?
+                !mensajesFiltrados ?
                 <h2>... cargando mensajes</h2>
                 :
-                <Lista mansajes={mensajes}/>
+                <Lista mansajes={mensajesFiltrados}/>
             }
         </div>
     )

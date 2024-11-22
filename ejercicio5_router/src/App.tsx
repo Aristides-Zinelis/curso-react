@@ -6,6 +6,7 @@ import { Router } from './router/Router';
 function App() {
   const apiURL = 'https://dev.contanimacion.com/api_tablon/api/mensajes';
 
+
   return (
     <div className="App">
       <nav>
@@ -17,6 +18,7 @@ function App() {
       </nav>
 
     <Router apiURL={apiURL}></Router>
+    {/* <RouterProvider router={router} ></RouterProvider> */}
 
     </div>
   );
