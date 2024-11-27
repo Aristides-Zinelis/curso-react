@@ -54,7 +54,7 @@ export function Mesages( props: IProps){
             <h1>Mensages</h1>
             <div>
                 <input 
-                    placeholder="filtrar poir asunto"
+                    placeholder="filtrar por asunto"
                     ref={campoFiltro}
                 />
                 <button onClick={filtrar}>filtrat</button>

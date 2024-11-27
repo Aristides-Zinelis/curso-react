@@ -29,9 +29,9 @@ const Detalle =(props: IProps) => {
 
         }, [props.id]);
 
-        const tooggleAmpliar = () => {
-            setAmpliado(!ampliado);
-        };
+    const tooggleAmpliar = () => {
+        setAmpliado(!ampliado);
+    };
 
     return (
         <div>
